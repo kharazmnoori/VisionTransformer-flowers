@@ -114,6 +114,16 @@ def process_image_label(path):
     image = image / 255.0
     print(image.shape)
 
+    """ Preprocessing to patches """
+    patch_shape = (hp['patch_size'], hp["patch_size"], hp["num_channels"])
+    # now we use the patchify function
+    # first input is the image(h,w,c_num) then patch_shape the next is the step 
+    # step is the size of the patch, so if 0 to 25 the next would be the 26th item
+    patches = patchify(image, patch_shape, step=hp["patch_size"])
+    print(patches.shape)
+   
+   
+
 
 if __name__ == "__main__":
     """seeding"""
