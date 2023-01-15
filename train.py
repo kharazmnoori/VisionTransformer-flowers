@@ -100,6 +100,9 @@ def load_data(path, split=0.1):
     train_x, valid_x = train_test_split(images, test_size=split_size, random_state=42)
     train_x, test_x = train_test_split(train_x, test_size=split_size, random_state=42)
 
+    return train_x, valid_x, test_x
+
+
 if __name__ == "__main__":
     """seeding"""
     np.random.seed(42)
@@ -115,4 +118,8 @@ if __name__ == "__main__":
     print(dataset_path)
 
     """ Dataset """
-    load_data(dataset_path)
+    train_x, valid_x, test_x = load_data(dataset_path)
+    #print to see how many samples do we have
+    print("Number of training samples: ", len(train_x))
+    print("Number of validation samples: ", len(valid_x))
+    print("Number of testing samples: ", len(test_x))
