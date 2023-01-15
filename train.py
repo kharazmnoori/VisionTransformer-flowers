@@ -102,6 +102,18 @@ def load_data(path, split=0.1):
 
     return train_x, valid_x, test_x
 
+"""
+process individual image path and extract lables from each class
+"""
+def process_image_label(path):
+    """ Reading Images """
+    image = cv2.imread(path, cv2.IMREAD_COLOR)
+    # resize the image
+    image = cv2.resize(image, (hp["image_size"], hp["image_size"]))
+    # normalize all the pixel values
+    image = image / 255.0
+    print(image.shape)
+
 
 if __name__ == "__main__":
     """seeding"""
@@ -123,3 +135,6 @@ if __name__ == "__main__":
     print("Number of training samples: ", len(train_x))
     print("Number of validation samples: ", len(valid_x))
     print("Number of testing samples: ", len(test_x))
+
+    # test the process_image_label function
+    print(process_image_label(train_x[0]))
