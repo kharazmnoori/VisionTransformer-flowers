@@ -111,7 +111,7 @@ def process_image_label(path):
     # resize the image
     image = cv2.resize(image, (hp["image_size"], hp["image_size"]))
     # normalize all the pixel values
-    image = image / 255.0
+    # image = image / 255.0
     print(image.shape)
 
     """ Preprocessing to patches """
