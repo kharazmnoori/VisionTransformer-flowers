@@ -78,7 +78,7 @@ hp['lr'] = 1e-4
 hp['num-classes'] = 5
 
 # Define the name of the classes
-hp['class-names'] = ['daisy', 'dandelion', 'rose', 'sunflower', 'tulip']
+hp['class-names'] = ['daisy', 'dandelion', 'rose', 'sunflower', 'tulips']
 
 # This function will help us create blank folders
 def create_dir(path):
@@ -145,7 +145,11 @@ def process_image_label(path):
     # now that we know the path items are seperated with /:
     # we split the path and extract the last item which is the label
     class_name = path.split("/")[-2]
-    # print(class_name)
+    print(class_name)
+    # now we need the index
+    # we use the index of the class name in the class names list
+    class_index = hp["class-names"].index(class_name)
+    print(class_index)
     
     
 
@@ -171,4 +175,4 @@ if __name__ == "__main__":
     print("Number of testing samples: ", len(test_x))
 
     # test the process_image_label function 
-    print(process_image_label(train_x[3]))
+    print(process_image_label(train_x[0]))
