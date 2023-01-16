@@ -145,11 +145,13 @@ def process_image_label(path):
     # now that we know the path items are seperated with /:
     # we split the path and extract the last item which is the label
     class_name = path.split("/")[-2]
-    print(class_name)
+    # print(class_name)
     # now we need the index
     # we use the index of the class name in the class names list
     class_index = hp["class-names"].index(class_name)
-    print(class_index)
+    class_index = np.array(class_index, dtype=np.int32)
+    # print(class_index)
+    return patches, class_index
     
     
 
