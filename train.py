@@ -120,10 +120,16 @@ def process_image_label(path):
     # first input is the image(h,w,c_num) then patch_shape the next is the step 
     # step is the size of the patch, so if 0 to 25 the next would be the 26th item
     patches = patchify(image, patch_shape, step=hp["patch_size"])
+    # after printing the patches and finding out the shape of it which was
+    # (8, 8, 25, 25, 3) we then manually use np.reshape to make 8 x 8 = 64 
+    # after that we use a for loop to save these 64 patches
+    patches = np.reshape(patches, (64, 25, 25, 3))
+    for i in range(64):
+        cv2.imwrite(f"files/{i}.png", patches[i])
     print(patches.shape)
-   
-   
 
+
+    
 
 if __name__ == "__main__":
     """seeding"""
@@ -146,5 +152,5 @@ if __name__ == "__main__":
     print("Number of validation samples: ", len(valid_x))
     print("Number of testing samples: ", len(test_x))
 
-    # test the process_image_label function
-    print(process_image_label(train_x[0]))
+    # test the process_image_label function 
+    print(process_image_label(train_x[3]))
