@@ -125,10 +125,10 @@ def process_image_label(path):
     # after that we use a for loop to save these 64 patches
     patches = np.reshape(patches, (64, 25, 25, 3))
 
-    """This is just a test to see the patches in files folder
-     and see how it works
-     We comment it out
-    """
+    # This is just a test to see the patches in files folder
+    # and see how it works
+    # We comment it out
+    
     # for i in range(64):
     #     cv2.imwrite(f"files/{i}.png", patches[i])
     # print(patches.shape)
@@ -137,6 +137,13 @@ def process_image_label(path):
     patches = np.reshape(patches, hp["flat_patches_shape"])
     # now we need to provide them a datatype    
     patches = patches.astype(np.float32)
+
+    """ Label """
+    # we need to extract the label from the path and the name of the label
+    # so we print the label path first to extract the label from it
+    # print(path)
+    print(path)
+    # label = path.split(os.path.sep)[-2]
     
 
 if __name__ == "__main__":
