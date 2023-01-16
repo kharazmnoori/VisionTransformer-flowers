@@ -124,11 +124,19 @@ def process_image_label(path):
     # (8, 8, 25, 25, 3) we then manually use np.reshape to make 8 x 8 = 64 
     # after that we use a for loop to save these 64 patches
     patches = np.reshape(patches, (64, 25, 25, 3))
-    for i in range(64):
-        cv2.imwrite(f"files/{i}.png", patches[i])
-    print(patches.shape)
 
+    """This is just a test to see the patches in files folder
+     and see how it works
+     We comment it out
+    """
+    # for i in range(64):
+    #     cv2.imwrite(f"files/{i}.png", patches[i])
+    # print(patches.shape)
 
+    # flatten the patches into an apropriate shape (the hyper parameter)
+    patches = np.reshape(patches, hp["flat_patches_shape"])
+    # now we need to provide them a datatype    
+    patches = patches.astype(np.float32)
     
 
 if __name__ == "__main__":
