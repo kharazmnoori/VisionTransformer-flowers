@@ -142,8 +142,11 @@ def process_image_label(path):
     # we need to extract the label from the path and the name of the label
     # so we print the label path first to extract the label from it
     # print(path)
-    print(path)
-    # label = path.split(os.path.sep)[-2]
+    # now that we know the path items are seperated with /:
+    # we split the path and extract the last item which is the label
+    class_name = path.split("/")[-2]
+    # print(class_name)
+    
     
 
 if __name__ == "__main__":
