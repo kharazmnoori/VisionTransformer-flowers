@@ -78,7 +78,7 @@ hp['lr'] = 1e-4
 hp['num-classes'] = 5
 
 # Define the name of the classes
-hp['class-names'] = ['daisy', 'dandelion', 'rose', 'sunflower', 'tulips']
+hp['class-names'] = ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
 
 # This function will help us create blank folders
 def create_dir(path):
@@ -106,12 +106,16 @@ def load_data(path, split=0.1):
 process individual image path and extract lables from each class
 """
 def process_image_label(path):
+    print(path)
+
     """ Reading Images """
+    # because this path is gonna be encoded through tf so we decode it first
+    path = path.decode()
     image = cv2.imread(path, cv2.IMREAD_COLOR)
     # resize the image
     image = cv2.resize(image, (hp["image_size"], hp["image_size"]))
     # normalize all the pixel values
-    # image = image / 255.0
+    image = image / 255.0
     print(image.shape)
 
     """ Preprocessing to patches """
@@ -153,6 +157,29 @@ def process_image_label(path):
     # print(class_index)
     return patches, class_index
     
+def parse(path):
+    # in order to use the function "process_image_label" inside of tf
+    # we need to use tf.numpy_function
+    # to numpy_funtion, we're going to give the function that we want to execute in tf
+    # then input which is [path] and the outputs and their type which is [tf.float32, tf.int32]
+    patches, labels = tf.numpy_function(process_image_label, [path], [tf.float32, tf.int32])
+
+    # make them into vectors
+    labels = tf.one_hot(labels, hp["num_classes"])
+
+    # set shapes for patches and labels
+    patches.set_shape(hp["flat_patches_shape"])
+    labels.set_shape(hp["num_classes"])
+
+    return patches, labels
+
+# one more function in the data processing
+def create_dataset(images, batch=32):
+    ds =  tf.data.Dataset.from_tensor_slices((images))
+    ds = ds.map(parse).batch(batch).prefetch(8)
+    return ds
+    
+
     
 
 if __name__ == "__main__":
@@ -177,4 +204,22 @@ if __name__ == "__main__":
     print("Number of testing samples: ", len(test_x))
 
     # test the process_image_label function 
-    print(process_image_label(train_x[0]))
+    process_image_label(train_x[0])
+    train_ds = tf_dataset(train_x, batch=hp["batch_size"])
+    valid_ds = tf_dataset(valid_x, batch=hp["batch_size"])
+
+    # test the dataset
+    # for patches, labels in train_ds.take(1):
+    #     print(patches.shape)
+    #     print(labels.shape)
+
+    for x, y in train_ds:
+        print(x.shape)
+        print(y.shape)
+        break
+
+
+
+    print("Done")
+
+print("done")
