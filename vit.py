@@ -22,8 +22,8 @@ def ViT(cf):
     """ Patch + Embedding """
     patch_embed = Dense(cf["hidden_dim"])(inputs) # the shape of this layer print(patch_embed.shape) # (None, 256, 768)
     positions = tf.range(start=0,limit=cf["num_patches"], delta=1)
-    pos_embed = Embedding(input_dim=cf["num_patches"], output_dim=cf["hidden_dim"])(positions)
-    print(pos_embed)
+    pos_embed = Embedding(input_dim=cf["num_patches"], output_dim=cf["hidden_dim"])(positions) ## (256, 768)
+   
 
 
 
