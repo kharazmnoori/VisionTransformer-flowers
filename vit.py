@@ -24,8 +24,8 @@ def ViT(cf):
     positions = tf.range(start=0,limit=cf["num_patches"], delta=1)
     pos_embed = Embedding(input_dim=cf["num_patches"], output_dim=cf["hidden_dim"])(positions) ## (256, 768)
    
-    embed = patch_embed + pos_embed
-    print(embed)
+    embed = patch_embed + pos_embed ## (None, 256, 768)
+    
 
 
 
