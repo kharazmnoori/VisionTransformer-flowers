@@ -30,7 +30,7 @@ def ViT(cf):
 if __name__ == '__main__':
     config = {}
     config["num_layers"] = 12
-    config["hidden_layers"] = 768
+    config["hidden_dim"] = 768
     config["num_heads"] = 12
     config["num_dim"] = 3072
     config["dropout_rate"] = 0.1
