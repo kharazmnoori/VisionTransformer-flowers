@@ -12,10 +12,14 @@ import tensorflow as tf
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import Model
 
+
+# defining the VisionTransformer function
 def ViT(cf):
     input_shape = (cf["num_patches"], cf["patch_size"] * cf["patch_size"] * cf["num_channels"]) 
+    inputs = Input(shape=input_shape)
+    print(inputs.shape)
 
- 
+
 # configuration
 if __name__ == '__main__':
     config = {}
@@ -29,3 +33,4 @@ if __name__ == '__main__':
     config["num_classes"] = 3
 
 
+ViT(config)
