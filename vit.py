@@ -30,7 +30,7 @@ if __name__ == '__main__':
     config["dropout_rate"] = 0.1
     config["num_patches"] = 256
     config["patch_size"] = 32
-    config["num_classes"] = 3
+    config["num_channels"] = 3
 
 
 ViT(config)
