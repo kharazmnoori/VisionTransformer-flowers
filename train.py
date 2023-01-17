@@ -214,11 +214,12 @@ if __name__ == "__main__":
     #     print(patches.shape)
     #     print(labels.shap
 
-    for x, y in train_ds:
-        print(x.shape)
-        print(y.shape)
-        break
+    # for x, y in train_ds:
+    #     print(x.shape)
+    #     print(y.shape)
+    #     break
 
+    """"""
 
 
     print("Done")
