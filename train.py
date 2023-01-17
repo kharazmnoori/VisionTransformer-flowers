@@ -110,7 +110,7 @@ def process_image_label(path):
 
     """ Reading Images """
     # because this path is gonna be encoded through tf so we decode it first
-    # path = path.decode()
+    path = path.decode()
     image = cv2.imread(path, cv2.IMREAD_COLOR)
     # resize the image
     image = cv2.resize(image, (hp["image_size"], hp["image_size"]))
@@ -152,7 +152,7 @@ def process_image_label(path):
     # print(class_name)
     # now we need the index
     # we use the index of the class name in the class names list
-    class_index = hp["class-names"].index(class_name)
+    class_index = hp["class_names"].index(class_name)
     class_index = np.array(class_index, dtype=np.int32)
     # print(class_index)
     return patches, class_index
