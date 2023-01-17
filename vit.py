@@ -12,6 +12,9 @@ import tensorflow as tf
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import Model
 
+def ViT(cf):
+    input_shape = (cf["num_patches"], cf["patch_size"] * cf["patch_size"] * cf["num_channels"]) 
+
  
 # configuration
 if __name__ == '__main__':
