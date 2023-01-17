@@ -75,10 +75,10 @@ hp["epochs"] = 500
 hp['lr'] = 1e-4
 
 # Define number of classes
-hp['num-classes'] = 5
+hp['num_classes'] = 5
 
 # Define the name of the classes
-hp['class-names'] = ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
+hp['class_names'] = ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
 
 # This function will help us create blank folders
 def create_dir(path):
@@ -110,7 +110,7 @@ def process_image_label(path):
 
     """ Reading Images """
     # because this path is gonna be encoded through tf so we decode it first
-    path = path.decode()
+    # path = path.decode()
     image = cv2.imread(path, cv2.IMREAD_COLOR)
     # resize the image
     image = cv2.resize(image, (hp["image_size"], hp["image_size"]))
@@ -162,6 +162,7 @@ def parse(path):
     # we need to use tf.numpy_function
     # to numpy_funtion, we're going to give the function that we want to execute in tf
     # then input which is [path] and the outputs and their type which is [tf.float32, tf.int32]
+    print(path)
     patches, labels = tf.numpy_function(process_image_label, [path], [tf.float32, tf.int32])
 
     # make them into vectors
@@ -174,7 +175,7 @@ def parse(path):
     return patches, labels
 
 # one more function in the data processing
-def create_dataset(images, batch=32):
+def tf_dataset(images, batch=32):
     ds =  tf.data.Dataset.from_tensor_slices((images))
     ds = ds.map(parse).batch(batch).prefetch(8)
     return ds
@@ -204,14 +205,14 @@ if __name__ == "__main__":
     print("Number of testing samples: ", len(test_x))
 
     # test the process_image_label function 
-    process_image_label(train_x[0])
+    # process_image_label(train_x[0])
     train_ds = tf_dataset(train_x, batch=hp["batch_size"])
     valid_ds = tf_dataset(valid_x, batch=hp["batch_size"])
 
     # test the dataset
     # for patches, labels in train_ds.take(1):
     #     print(patches.shape)
-    #     print(labels.shape)
+    #     print(labels.shap
 
     for x, y in train_ds:
         print(x.shape)
@@ -221,5 +222,3 @@ if __name__ == "__main__":
 
 
     print("Done")
-
-print("done")
